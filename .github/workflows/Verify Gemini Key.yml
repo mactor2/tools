@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Verify Flash:
+  Verify-Flash:
     runs-on: ubuntu-latest
     steps:
       - name: 迁出代码
@@ -62,7 +62,7 @@ jobs:
             -F file1=@"$FREE_FILE" \
             -F file2=@"$PAID_FILE"
 
-  Verify Pro:
+  Verify-Pro:
     runs-on: ubuntu-latest
     steps:
       - name: 迁出代码
