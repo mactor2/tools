@@ -28,16 +28,16 @@ jobs:
           TS=$(date +%s)
           echo $(TZ="Asia/Shanghai" date -d "@$TS" "+%Y%m%d%H%M%S") > time.txt
           echo $(TZ="Asia/Shanghai" date -d "@$TS" "+%Y-%m-%d %H:%M:%S") > new_time.txt
-          mv freekey.txt freekey-flash-$(cat time.txt).txt
-          mv paidkey.txt paidkey-flash-$(cat time.txt).txt
-          echo "FREE_COUNT=$(wc -l < freekey-flash-$(cat time.txt).txt)" >> $GITHUB_ENV
-          echo "PAID_COUNT=$(wc -l < paidkey-flash-$(cat time.txt).txt)" >> $GITHUB_ENV
+          mv freekey.txt freekey-$(cat time.txt).txt
+          mv paidkey.txt paidkey-$(cat time.txt).txt
+          echo "FREE_COUNT=$(wc -l < freekey-$(cat time.txt).txt)" >> $GITHUB_ENV
+          echo "PAID_COUNT=$(wc -l < paidkey-$(cat time.txt).txt)" >> $GITHUB_ENV
           echo "MODEL_FULL_NAME=Gemini 2.5 Flash" >> $GITHUB_ENV
 
       - name: 发送结果
         run: |
-          FREE_FILE="freekey-flash-$(cat time.txt).txt"
-          PAID_FILE="paidkey-flash-$(cat time.txt).txt"
+          FREE_FILE="freekey-$(cat time.txt).txt"
+          PAID_FILE="paidkey-$(cat time.txt).txt"
           if [ ! -s "$FREE_FILE" ]; then
             echo "此类别无有效的密钥。" > "$FREE_FILE"
           fi
@@ -55,7 +55,7 @@ jobs:
                 {
                     "type": "document",
                     "media": "attach://file2",
-                    "caption": "<b>🚀 Gemini密钥验证完成 (Flash)</b>\n\n<b>测试模型:</b> ${{ env.MODEL_FULL_NAME }}\n<b>免费密钥:</b> ${{ env.FREE_COUNT }} 个\n<b>付费密钥:</b> ${{ env.PAID_COUNT }} 个\n\n<b>完成时间:</b> '"$COMPLETION_TIME"'",
+                    "caption": "<b>🚀 Gemini密钥验证完成</b>\n\n<b>测试模型:</b> ${{ env.MODEL_FULL_NAME }}\n<b>免费密钥:</b> ${{ env.FREE_COUNT }} 个\n<b>付费密钥:</b> ${{ env.PAID_COUNT }} 个\n\n<b>完成时间:</b> '"$COMPLETION_TIME"'",
                     "parse_mode": "HTML"
                 }
             ]' \
@@ -81,16 +81,16 @@ jobs:
           TS=$(date +%s)
           echo $(TZ="Asia/Shanghai" date -d "@$TS" "+%Y%m%d%H%M%S") > time.txt
           echo $(TZ="Asia/Shanghai" date -d "@$TS" "+%Y-%m-%d %H:%M:%S") > new_time.txt
-          mv freekey.txt freekey-pro-$(cat time.txt).txt
-          mv paidkey.txt paidkey-pro-$(cat time.txt).txt
-          echo "FREE_COUNT=$(wc -l < freekey-pro-$(cat time.txt).txt)" >> $GITHUB_ENV
-          echo "PAID_COUNT=$(wc -l < paidkey-pro-$(cat time.txt).txt)" >> $GITHUB_ENV
+          mv freekey.txt freekey-$(cat time.txt).txt
+          mv paidkey.txt paidkey-$(cat time.txt).txt
+          echo "FREE_COUNT=$(wc -l < freekey-$(cat time.txt).txt)" >> $GITHUB_ENV
+          echo "PAID_COUNT=$(wc -l < paidkey-$(cat time.txt).txt)" >> $GITHUB_ENV
           echo "MODEL_FULL_NAME=Gemini 2.5 Pro" >> $GITHUB_ENV
 
       - name: 发送结果
         run: |
-          FREE_FILE="freekey-pro-$(cat time.txt).txt"
-          PAID_FILE="paidkey-pro-$(cat time.txt).txt"
+          FREE_FILE="freekey-$(cat time.txt).txt"
+          PAID_FILE="paidkey-$(cat time.txt).txt"
           if [ ! -s "$FREE_FILE" ]; then
             echo "此类别无有效的密钥。" > "$FREE_FILE"
           fi
@@ -108,7 +108,7 @@ jobs:
                 {
                     "type": "document",
                     "media": "attach://file2",
-                    "caption": "<b>🚀 Gemini密钥验证完成 (Pro)</b>\n\n<b>测试模型:</b> ${{ env.MODEL_FULL_NAME }}\n<b>免费密钥:</b> ${{ env.FREE_COUNT }} 个\n<b>付费密钥:</b> ${{ env.PAID_COUNT }} 个\n\n<b>完成时间:</b> '"$COMPLETION_TIME"'",
+                    "caption": "<b>🚀 Gemini密钥验证完成</b>\n\n<b>测试模型:</b> ${{ env.MODEL_FULL_NAME }}\n<b>免费密钥:</b> ${{ env.FREE_COUNT }} 个\n<b>付费密钥:</b> ${{ env.PAID_COUNT }} 个\n\n<b>完成时间:</b> '"$COMPLETION_TIME"'",
                     "parse_mode": "HTML"
                 }
             ]' \
